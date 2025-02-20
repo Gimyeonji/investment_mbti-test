@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>투자 유형 테스트</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { max-width: 600px; margin: auto; padding: 20px; }
+        .question { margin: 15px 0; }
+        .result { font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🎯 투자 유형 테스트</h2>
+        <form id="mbtiForm">
+            <div class="question" data-type="EI">1. 투자 아이디어를 주변 사람들과 적극적으로 공유하는 편이다.<br>
+                <input type="radio" name="q1" value="E"> 예
+                <input type="radio" name="q1" value="I"> 아니오
+            </div>
+            <div class="question" data-type="EI">2. 금융 뉴스나 커뮤니티에서 활발히 정보를 찾고 토론하는 걸 즐긴다.<br>
+                <input type="radio" name="q2" value="E"> 예
+                <input type="radio" name="q2" value="I"> 아니오
+            </div>
+            <div class="question" data-type="SN">6. 과거 데이터를 기반으로 투자 결정을 내리는 편이다.<br>
+                <input type="radio" name="q6" value="S"> 예
+                <input type="radio" name="q6" value="N"> 아니오
+            </div>
+            <div class="question" data-type="TF">11. 투자 결정을 내릴 때 논리와 데이터를 가장 중요하게 생각한다.<br>
+                <input type="radio" name="q11" value="T"> 예
+                <input type="radio" name="q11" value="F"> 아니오
+            </div>
+            <div class="question" data-type="PJ">16. 투자 결정을 즉흥적으로 내리는 경우가 많다.<br>
+                <input type="radio" name="q16" value="P"> 예
+                <input type="radio" name="q16" value="J"> 아니오
+            </div>
+            <button type="button" onclick="calculateMBTI()">결과 보기</button>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+    <script>
+        function calculateMBTI() {
+            let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, P: 0, J: 0 };
+            document.querySelectorAll('input[type=radio]:checked').forEach(input => {
+                scores[input.value]++;
+            });
+            let mbti = (scores.E >= scores.I ? 'E' : 'I') +
+                       (scores.S >= scores.N ? 'S' : 'N') +
+                       (scores.T >= scores.F ? 'T' : 'F') +
+                       (scores.P >= scores.J ? 'P' : 'J');
+            document.getElementById("result").innerText = "당신의 투자 MBTI는 " + mbti + " 입니다!";
+        }
+    </script>
+</body>
+</html>
